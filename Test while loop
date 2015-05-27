@@ -1,0 +1,34 @@
+#include <iostream> 
+#include <fstream> 
+#include "Text.h" 
+
+
+int main() 
+{ 
+
+	Text test;
+	int count = 0; 
+	ifstream infile; 
+	infile.open("progsamp.dat"); 
+	ofstream outfile; 
+	outfile.open("test.txt"); 
+	while (infile) 
+	{ 
+		while (infile.peek() != ' ' && infile.peek() != '\t' && infile.peek() != '\n' && infile.peek() != '\0')
+			infile >> test; 
+			test.showStructure();
+		if (infile.peek() == ' ')
+			infile >> test;
+		if (infile.peek() == '\t')
+			infile >> test;
+		if (infile.peek() == '\n')
+			infile >> test;
+		if (infile.peek() == '\0')
+			test.clear();
+	}
+
+	infile.close(); 
+	outfile.close(); 
+
+	return 0; 
+}
