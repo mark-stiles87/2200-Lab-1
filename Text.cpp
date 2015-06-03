@@ -1,4 +1,5 @@
 #include "Text.h"
+#include <cstring>
 Text::Text(const char*charSeq)
 {
 	bufferSize = strlen(charSeq) + 1;
@@ -63,7 +64,7 @@ Text Text::toUpper() const
 Text Text::toLower() const
 {
 	Text out(*this);
-	for (int i = 0; i < out.bufferSize;i++)
+	for (int i = 0; i < out.bufferSize; i++)
 		out.buffer[i] = static_cast<char>(tolower(out.buffer[i]));
 	return out;
 }
@@ -101,4 +102,20 @@ bool Text::operator==(const Text& other) const
 			return 0;
 	}
 	return 1;
+}
+bool Text::operator<(const Text& other) const
+{
+	int compare = strcmp(buffer, other.buffer);
+	if (0>compare)
+		return 1;
+	else
+		return 0;
+}
+bool Text::operator>(const Text& other) const
+{
+	int compare = strcmp(buffer, other.buffer);
+	if (0 < compare)
+		return 1;
+	else
+		return 0;
 }
